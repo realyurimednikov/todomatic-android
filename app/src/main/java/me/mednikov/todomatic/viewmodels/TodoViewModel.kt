@@ -13,7 +13,7 @@ import me.mednikov.todomatic.data.repositories.TodoRepository
 
 class TodoViewModel(application: Application): AndroidViewModel(application) {
 
-    private val dao: TodoDao = TodoDatabase.getDatabase(application).todoDao();
+    private val dao: TodoDao = TodoDatabase.getDatabase(application).todoDao()
     private val repository: TodoRepository
 
     val getAll: LiveData<List<TodoEntity>>
