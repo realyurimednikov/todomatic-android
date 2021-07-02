@@ -30,15 +30,10 @@ class ListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
         mTodoViewModel.getAll.observe(viewLifecycleOwner, Observer { data ->
             adapter.setData(data)
-            println("Hello! "  + data.size)
         })
 
         fab.setOnClickListener{
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
-        }
-
-        view.setOnClickListener{
-            findNavController().navigate(R.id.action_listFragment_to_updateFragment)
         }
 
         setHasOptionsMenu(true)

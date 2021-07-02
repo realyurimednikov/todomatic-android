@@ -28,4 +28,10 @@ class TodoViewModel(application: Application): AndroidViewModel(application) {
             repository.insert(entity)
         }
     }
+
+    fun update(entity: TodoEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.update(entity)
+        }
+    }
 }

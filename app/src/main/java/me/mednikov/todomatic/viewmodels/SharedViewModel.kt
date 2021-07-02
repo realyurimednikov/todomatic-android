@@ -23,4 +23,12 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
     fun validate(title: String, description: String): Boolean {
         return !TextUtils.isEmpty(title) && !TextUtils.isEmpty(description)
     }
+
+    fun parsePriorityToInt (priority: Priority): Int {
+        return when (priority) {
+            Priority.HIGH -> {0}
+            Priority.MEDIUM -> {1}
+            Priority.LOW -> {2}
+        }
+    }
 }

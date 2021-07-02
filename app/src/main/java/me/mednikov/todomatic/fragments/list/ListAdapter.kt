@@ -1,12 +1,13 @@
 package me.mednikov.todomatic.fragments.list
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import me.mednikov.todomatic.R
 import me.mednikov.todomatic.data.models.Priority
@@ -29,6 +30,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.TodoItemViewHolder> (){
         val title = holder.itemView.findViewById<TextView>(R.id.row_title)
         val description = holder.itemView.findViewById<TextView>(R.id.row_description)
         val priority = holder.itemView.findViewById<CardView>(R.id.priority_indicator)
+        val background = holder.itemView.findViewById<ConstraintLayout>(R.id.rowBackground)
 
         title.text = items[position].title
         description.text = items[position].description
@@ -37,6 +39,11 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.TodoItemViewHolder> (){
             Priority.HIGH -> {priority.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.priority_high))}
             Priority.MEDIUM -> {priority.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.priority_medium))}
             Priority.LOW -> {priority.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.priority_low))}
+        }
+
+        background.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(items[position])
+            holder.itemView.findNavController().navigate(action)
         }
     }
 

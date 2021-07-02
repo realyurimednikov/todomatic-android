@@ -34,5 +34,8 @@
         <action
             android:id="@+id/action_updateFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <argument
+            android:name="todoItem"
+            app:argType="me.mednikov.todomatic.data.models.TodoEntity" />
     </fragment>
 </navigation>
