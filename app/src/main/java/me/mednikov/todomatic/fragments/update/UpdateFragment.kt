@@ -1,5 +1,6 @@
 package me.mednikov.todomatic.fragments.update
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.EditText
@@ -44,10 +45,24 @@ class UpdateFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_update){
-            update()
+        when(item.itemId) {
+            R.id.menu_update -> update()
+            R.id.menu_remove -> delete()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun delete() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes"){_,_ ->
+            mTodoViewModel.delete(args.todoItem)
+            Toast.makeText(context, "Item was removed", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+        }
+        builder.setNegativeButton("No"){_,_->}
+        builder.setTitle("Delete?")
+        builder.setMessage("Do you want to delete ${args.todoItem.title}?")
+        builder.create().show()
     }
 
     private fun update() {

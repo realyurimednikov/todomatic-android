@@ -15,4 +15,10 @@ interface TodoDao {
 
     @Update
     suspend fun update(entity: TodoEntity)
+
+    @Delete
+    suspend fun delete(entity: TodoEntity)
+
+    @Query("DELETE FROM todo_table")
+    suspend fun deleteAll()
 }
