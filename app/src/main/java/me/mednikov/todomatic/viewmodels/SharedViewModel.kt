@@ -3,9 +3,17 @@ package me.mednikov.todomatic.viewmodels
 import android.app.Application
 import android.text.TextUtils
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import me.mednikov.todomatic.data.models.Priority
+import me.mednikov.todomatic.data.models.TodoEntity
 
 class SharedViewModel(application: Application): AndroidViewModel(application) {
+
+    val emptyData: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    fun checkDataEmpty(data: List<TodoEntity>) {
+        emptyData.value = data.isEmpty()
+    }
 
     fun parsePriority(priority: String): Priority {
         return when (priority){
