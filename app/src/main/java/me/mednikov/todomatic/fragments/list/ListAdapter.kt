@@ -8,7 +8,7 @@ import me.mednikov.todomatic.databinding.RowItemBinding
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.TodoItemViewHolder> (){
 
-    private var items = emptyList<TodoEntity>()
+    var items = emptyList<TodoEntity>()
 
     class TodoItemViewHolder(private val binding:RowItemBinding):RecyclerView.ViewHolder(binding.root) {
 
