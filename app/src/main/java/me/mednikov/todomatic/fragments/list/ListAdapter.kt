@@ -2,6 +2,7 @@ package me.mednikov.todomatic.fragments.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import me.mednikov.todomatic.data.models.TodoEntity
 import me.mednikov.todomatic.databinding.RowItemBinding
@@ -39,7 +40,9 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.TodoItemViewHolder> (){
     }
 
     fun setData (data: List<TodoEntity>){
+        val diffUtil = TodoDiffUtil(items, data)
+        val diffUtilResult = DiffUtil.calculateDiff(diffUtil)
         this.items = data
-        notifyDataSetChanged()
+        diffUtilResult.dispatchUpdatesTo(this)
     }
 }
