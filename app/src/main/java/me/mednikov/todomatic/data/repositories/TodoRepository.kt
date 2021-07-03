@@ -23,4 +23,8 @@ class TodoRepository(private val dao: TodoDao) {
     suspend fun deleteAll(){
         dao.deleteAll()
     }
+
+    fun search(query: String): LiveData<List<TodoEntity>> {
+        return dao.search(query)
+    }
 }

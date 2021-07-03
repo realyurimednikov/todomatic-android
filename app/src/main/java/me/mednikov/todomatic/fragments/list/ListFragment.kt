@@ -3,6 +3,7 @@ package me.mednikov.todomatic.fragments.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,7 +19,7 @@ import me.mednikov.todomatic.viewmodels.SharedViewModel
 import me.mednikov.todomatic.viewmodels.TodoViewModel
 
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     val adapter: ListAdapter by lazy { ListAdapter() }
     val mTodoViewModel : TodoViewModel by viewModels()
@@ -60,6 +61,10 @@ class ListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.list_fragment_menu, menu)
+        val searchMenu = menu.findItem(R.id.menu_search)
+        val searchView = searchMenu.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -93,5 +98,28 @@ class ListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query!=null){
+            searchInDatabase(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        if (query!=null){
+            searchInDatabase(query)
+        }
+        return true
+    }
+
+    private fun searchInDatabase(query: String){
+        val searchQuery = "%$query%"
+        mTodoViewModel.search(searchQuery).observe(this, Observer { data->
+            data?.let {list ->
+                adapter.setData(list)
+            }
+        })
     }
 }

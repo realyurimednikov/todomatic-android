@@ -10,6 +10,9 @@ interface TodoDao {
     @Query("SELECT * FROM todo_table ORDER BY id ASC")
     fun getAll(): LiveData<List<TodoEntity>>
 
+    @Query("SELECT * FROM todo_table WHERE title LIKE :q")
+    fun search(q: String): LiveData<List<TodoEntity>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(entity: TodoEntity)
 
