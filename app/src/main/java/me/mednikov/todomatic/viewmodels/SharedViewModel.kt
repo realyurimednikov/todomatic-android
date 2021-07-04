@@ -1,6 +1,5 @@
 package me.mednikov.todomatic.viewmodels
 
-import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import me.mednikov.todomatic.data.models.Priority
@@ -28,7 +27,7 @@ class SharedViewModel(): ViewModel() {
     }
 
     fun validate(title: String, description: String): Boolean {
-        return !TextUtils.isEmpty(title) && !TextUtils.isEmpty(description)
+        return !title.isNullOrEmpty() && !description.isNullOrEmpty()
     }
 
 }

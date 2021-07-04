@@ -1,16 +1,13 @@
 package me.mednikov.todomatic.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import me.mednikov.todomatic.data.models.Priority
 import me.mednikov.todomatic.data.models.TodoEntity
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-@RunWith(AndroidJUnit4::class)
+
 class SharedViewModelTest {
 
     @get:Rule
