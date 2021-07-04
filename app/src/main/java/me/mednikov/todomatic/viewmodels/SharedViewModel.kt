@@ -1,13 +1,12 @@
 package me.mednikov.todomatic.viewmodels
 
-import android.app.Application
 import android.text.TextUtils
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import me.mednikov.todomatic.data.models.Priority
 import me.mednikov.todomatic.data.models.TodoEntity
 
-class SharedViewModel(application: Application): AndroidViewModel(application) {
+class SharedViewModel(): ViewModel() {
 
     val emptyData: MutableLiveData<Boolean> = MutableLiveData(false)
 
@@ -32,11 +31,4 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
         return !TextUtils.isEmpty(title) && !TextUtils.isEmpty(description)
     }
 
-    fun parsePriorityToInt (priority: Priority): Int {
-        return when (priority) {
-            Priority.HIGH -> {0}
-            Priority.MEDIUM -> {1}
-            Priority.LOW -> {2}
-        }
-    }
 }

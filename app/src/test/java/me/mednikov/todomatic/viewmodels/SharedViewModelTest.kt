@@ -10,7 +10,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
 @RunWith(AndroidJUnit4::class)
 class SharedViewModelTest {
 
@@ -21,7 +20,7 @@ class SharedViewModelTest {
 
     @Before
     fun setup(){
-        viewModel = SharedViewModel(ApplicationProvider.getApplicationContext())
+        viewModel = SharedViewModel()
     }
 
     @Test
