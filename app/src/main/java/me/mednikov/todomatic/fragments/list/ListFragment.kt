@@ -7,22 +7,24 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import me.mednikov.todomatic.R
 import me.mednikov.todomatic.data.models.TodoEntity
 import me.mednikov.todomatic.databinding.FragmentListBinding
 import me.mednikov.todomatic.viewmodels.SharedViewModel
 import me.mednikov.todomatic.viewmodels.TodoViewModel
 
-
+@AndroidEntryPoint
 class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     val adapter: ListAdapter by lazy { ListAdapter() }
-    val mTodoViewModel : TodoViewModel by viewModels()
+    val mTodoViewModel: TodoViewModel by hiltNavGraphViewModels(R.id.app_nav)
     val mSharedViewModel: SharedViewModel by viewModels()
 
     private var _binding: FragmentListBinding? = null
@@ -49,7 +51,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
 
-        mTodoViewModel.getAll.observe(viewLifecycleOwner, Observer { data ->
+        mTodoViewModel.getAll().observe(viewLifecycleOwner, Observer { data ->
             adapter.setData(data)
             mSharedViewModel.checkDataEmpty(data)
         })

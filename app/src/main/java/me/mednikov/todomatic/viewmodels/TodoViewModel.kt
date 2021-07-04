@@ -1,27 +1,19 @@
 package me.mednikov.todomatic.viewmodels
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import me.mednikov.todomatic.data.TodoDatabase
-import me.mednikov.todomatic.data.dao.TodoDao
 import me.mednikov.todomatic.data.models.TodoEntity
-import me.mednikov.todomatic.data.repositories.TodoRepository
+import me.mednikov.todomatic.data.repositories.ITodoRepository
+import javax.inject.Inject
 
-class TodoViewModel(application: Application): AndroidViewModel(application) {
-
-    private val dao: TodoDao = TodoDatabase.getDatabase(application).todoDao()
-    private val repository: TodoRepository
-
-    val getAll: LiveData<List<TodoEntity>>
-
-    init {
-        repository = TodoRepository(dao)
-        getAll = repository.getData
-    }
+@HiltViewModel
+class TodoViewModel
+    @Inject
+    constructor(private val repository: ITodoRepository): ViewModel() {
 
     fun insert(entity: TodoEntity) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -49,5 +41,9 @@ class TodoViewModel(application: Application): AndroidViewModel(application) {
 
     fun search(query: String): LiveData<List<TodoEntity>>{
         return repository.search(query)
+    }
+
+    fun getAll(): LiveData<List<TodoEntity>>{
+        return repository.getAll()
     }
 }

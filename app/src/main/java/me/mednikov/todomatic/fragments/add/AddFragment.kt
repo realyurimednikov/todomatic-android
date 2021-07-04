@@ -7,16 +7,19 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import me.mednikov.todomatic.R
 import me.mednikov.todomatic.data.models.TodoEntity
 import me.mednikov.todomatic.viewmodels.SharedViewModel
 import me.mednikov.todomatic.viewmodels.TodoViewModel
 
 
+@AndroidEntryPoint
 class AddFragment : Fragment() {
 
-    private val mTodoViewModel: TodoViewModel by viewModels()
+    private val mTodoViewModel: TodoViewModel by hiltNavGraphViewModels(R.id.app_nav)
     private val mSharedViewModel: SharedViewModel by viewModels()
 
     override fun onCreateView(
