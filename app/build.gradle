@@ -87,5 +87,5 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.37"
     implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
 
-
+    testImplementation "org.mockito:mockito-core:3.11.2"
 }
