@@ -53,7 +53,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
         mTodoViewModel.getAll().observe(viewLifecycleOwner, Observer { data ->
             adapter.setData(data)
-            mSharedViewModel.checkDataEmpty(data)
+//            mSharedViewModel.checkDataEmpty(data)
+            mSharedViewModel.setTasks(data)
         })
 
         setHasOptionsMenu(true)
