@@ -8,9 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="priority_high">#f44336</color>
-    <color name="priority_medium">#ffeb3b</color>
-    <color name="priority_low">#4caf50</color>
+    <color name="priority_high">#e57373</color>
+    <color name="priority_medium">#fff176</color>
+    <color name="priority_low">#81c784</color>
     <color name="text_title">#607d8b</color>
     <color name="text_basic">#1c313a</color>
+    <color name="bg_border">#cfd8dc</color>
+    <color name="list_background">#fafafa</color>
 </resources>
