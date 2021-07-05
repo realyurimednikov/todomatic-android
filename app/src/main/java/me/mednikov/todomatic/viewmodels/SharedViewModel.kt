@@ -8,6 +8,7 @@ import me.mednikov.todomatic.data.models.TodoEntity
 class SharedViewModel(): ViewModel() {
 
     val emptyData: MutableLiveData<Boolean> = MutableLiveData(false)
+    val tasksCount: MutableLiveData<Int> = MutableLiveData(0)
 
     fun checkDataEmpty(data: List<TodoEntity>) {
         emptyData.value = data.isEmpty()
@@ -28,6 +29,11 @@ class SharedViewModel(): ViewModel() {
 
     fun validate(title: String, description: String): Boolean {
         return !title.isNullOrEmpty() && !description.isNullOrEmpty()
+    }
+
+    fun setTasks(data: List<TodoEntity>) {
+        emptyData.value = data.isEmpty()
+        tasksCount.value = data.size
     }
 
 }

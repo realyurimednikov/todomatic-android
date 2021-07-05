@@ -2,6 +2,7 @@ package me.mednikov.todomatic.fragments
 
 import android.view.View
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
@@ -64,6 +65,13 @@ class BindingAdapters {
                 val action = ListFragmentDirections.actionListFragmentToUpdateFragment(data)
                 view.findNavController().navigate(action)
             }
+        }
+
+        @BindingAdapter("android:displayTasksCounter")
+        @JvmStatic
+        fun displayTasksCounter(view: TextView, count: Int){
+            val text = "You have ${count} tasks"
+            view.text = text
         }
     }
 }

@@ -88,4 +88,6 @@ dependencies {
     implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
 
     testImplementation "org.mockito:mockito-core:3.11.2"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
+
 }
